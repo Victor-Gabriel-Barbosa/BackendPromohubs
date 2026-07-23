@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, Numeric, Boolean, String, TIMESTAMP, BigInteger, DateTime
 from sqlalchemy.sql import text
 from datetime import datetime, timezone
-from database import Base
+from db.database import Base
 
 DEFAULT_TIMESTAMP = text('now()')
   
@@ -49,3 +49,14 @@ class NotaFiscal(Base):
   valor_total = Column(String, nullable=True)
   texto_extraido = Column(String, nullable=True)
   created_at = Column(DateTime(timezone=True), default=lambda: datetime.now(timezone.utc))
+  
+class OfertaKabum(Base):
+  __tablename__ = "oferta_kabum"
+  id = Column(Integer, primary_key=True, nullable=False)
+  nome = Column(String, nullable=True)
+  preco = Column(String, nullable=True)
+  desconto = Column(String, nullable=True)
+  link = Column(String, nullable=True)
+  imagem = Column(String, nullable=True)
+  publicado = Column(Boolean, server_default='True', nullable=False)
+  created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=DEFAULT_TIMESTAMP)

@@ -34,6 +34,14 @@ class NotaFiscal(BaseModel):
   telegram_username: Optional[str] = None
   valor_total: Optional[str] = None
   texto_extraido: Optional[str] = None
+  
+class OfertaKabum(BaseModel):
+  nome: str
+  preco: Optional[str] = None
+  desconto: Optional[str] = None
+  link: Optional[str] = None
+  imagem: Optional[str] = None
+  publicado: bool = True
 
 class ProdutoResponse(Produto):
   id: int
@@ -44,5 +52,13 @@ class CupomResponse(Cupom):
   model_config = ConfigDict(from_attributes=True)
   
 class PromocaoSteamResponse(PromocaoSteam):
+  id: int
+  model_config = ConfigDict(from_attributes=True)
+  
+class NotaFiscalResponse(NotaFiscal):
+  id: int
+  model_config = ConfigDict(from_attributes=True)
+  
+class OfertaKabumResponse(OfertaKabum):
   id: int
   model_config = ConfigDict(from_attributes=True)
