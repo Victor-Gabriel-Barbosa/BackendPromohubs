@@ -1,7 +1,7 @@
 import base64
 from telethon.sync import TelegramClient
 import aiohttp
-from utils import extrair_promocao
+from scraping.utils import extrair_promocao
 from config import API_ID, API_HASH, API_URL, GRUPOS, MIME
 
 # Inicializa o cliente do Telegram
