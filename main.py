@@ -86,7 +86,7 @@ async def remover_cupom(cupom_id: int, db: Session = Depends(get_db)):
 
 @app.post("/promocoes", status_code=status.HTTP_201_CREATED)
 async def criar_promocao(promocao: PromocaoSteam, db: Session = Depends(get_db)):
-  nova_promocao = models.promocao_steam(**promocao.model_dump())
+  nova_promocao = models.PromocaoSteam(**promocao.model_dump())
   db.add(nova_promocao)
   db.commit()
   db.refresh(nova_promocao)
@@ -95,11 +95,11 @@ async def criar_promocao(promocao: PromocaoSteam, db: Session = Depends(get_db))
 
 @app.get("/promocoes", response_model=List[PromocaoSteamResponse], status_code=status.HTTP_200_OK)
 async def buscar_promocoes(db: Session = Depends(get_db), skip: int = 0, limit: int = 100):
-  return db.query(models.promocao_steam).offset(skip).limit(limit).all()
+  return db.query(models.PromocaoSteam).offset(skip).limit(limit).all()
 
 @app.put("/promocoes/{promocao_id}", response_model=PromocaoSteamResponse, status_code=status.HTTP_200_OK)
 async def atualizar_promocao(promocao_id: int, promocao: PromocaoSteam, db: Session = Depends(get_db)):
-  promocao_query = db.query(models.promocao_steam).filter(models.promocao_steam.id == promocao_id)
+  promocao_query = db.query(models.PromocaoSteam).filter(models.PromocaoSteam.id == promocao_id)
   promocao_existente = promocao_query.first()
   if promocao_existente is None:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Promoção não encontrada")      
@@ -109,7 +109,7 @@ async def atualizar_promocao(promocao_id: int, promocao: PromocaoSteam, db: Sess
 
 @app.delete("/promocoes/{promocao_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def remover_promocao(promocao_id: int, db: Session = Depends(get_db)):
-  promocao_query = db.query(models.promocao_steam).filter(models.promocao_steam.id == promocao_id)
+  promocao_query = db.query(models.PromocaoSteam).filter(models.PromocaoSteam.id == promocao_id)
   if promocao_query.first() is None:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Promoção não encontrada")
   promocao_query.delete(synchronize_session=False)
