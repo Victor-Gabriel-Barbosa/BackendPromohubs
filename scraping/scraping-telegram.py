@@ -1,7 +1,7 @@
 import base64
 from telethon.sync import TelegramClient
 import aiohttp
-from scraping.utils import extrair_promocao
+from utils import extrair_promocao
 from config import API_ID, API_HASH, API_URL, GRUPOS, MIME
 
 # Inicializa o cliente do Telegram
@@ -18,7 +18,7 @@ async def main():
     for grupo in GRUPOS:
       print(f"-> Coletando mensagens de: {grupo}")
       try:
-        async for mensagem in client.iter_messages(grupo, limit=30):
+        async for mensagem in client.iter_messages(grupo, limit=20):
           # Baixa a imagem diretamente para memória
           imagem_bytes = await client.download_media(mensagem, bytes)
           

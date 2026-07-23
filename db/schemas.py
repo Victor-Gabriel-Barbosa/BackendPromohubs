@@ -37,7 +37,7 @@ class NotaFiscal(BaseModel):
   
 class OfertaKabum(BaseModel):
   nome: str
-  preco: Optional[str] = None
+  preco: Optional[Decimal] = None
   desconto: Optional[str] = None
   link: Optional[str] = None
   imagem: Optional[str] = None

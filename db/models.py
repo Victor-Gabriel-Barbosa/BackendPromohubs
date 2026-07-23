@@ -54,7 +54,7 @@ class OfertaKabum(Base):
   __tablename__ = "oferta_kabum"
   id = Column(Integer, primary_key=True, nullable=False)
   nome = Column(String, nullable=True)
-  preco = Column(String, nullable=True)
+  preco = Column(Numeric(10, 2), nullable=True)
   desconto = Column(String, nullable=True)
   link = Column(String, nullable=True)
   imagem = Column(String, nullable=True)

@@ -9,6 +9,7 @@ API_URL = os.getenv("API_URL")
 TOKEN = os.getenv("TOKEN")
 CHAT_ID = os.getenv("CHAT_ID")
 STEAM_URL = os.getenv("STEAM_URL")
+KABUM_URL = os.getenv("KABUM_URL")
 
 # Grupos a monitorar
 GRUPOS = [
