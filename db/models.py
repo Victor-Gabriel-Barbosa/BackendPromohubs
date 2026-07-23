@@ -5,7 +5,7 @@ from database import Base
 
 DEFAULT_TIMESTAMP = text('now()')
   
-class produto(Base):
+class Produto(Base):
   __tablename__ = "produto"
   id = Column(Integer, primary_key=True, nullable=False)
   nome = Column(String, nullable=True)
@@ -17,7 +17,7 @@ class produto(Base):
   publicado = Column(Boolean, server_default='True', nullable=False)
   created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=DEFAULT_TIMESTAMP)
   
-class cupom(Base):
+class Cupom(Base):
   __tablename__ = "cupom"
   id = Column(Integer, primary_key=True, nullable=False)
   nome = Column(String, nullable=True)
@@ -29,7 +29,7 @@ class cupom(Base):
   publicado = Column(Boolean, server_default='True', nullable=False)
   created_at = Column(TIMESTAMP(timezone=True), nullable=False, server_default=DEFAULT_TIMESTAMP)
   
-class promocao_steam(Base):
+class PromocaoSteam(Base):
   __tablename__ = "promocao_steam"
   id = Column(Integer, primary_key=True, nullable=False)
   nome = Column(String, nullable=True)

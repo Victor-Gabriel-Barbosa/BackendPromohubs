@@ -1,6 +1,6 @@
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI, status, Depends, HTTPException, Response
-from db.schemas import Produto, Cupom, PromocaoSteam, ProdutoResponse, CupomResponse, PromocaoSteamResponse
+from db.schemas import Produto, Cupom, PromocaoSteam, NotaFiscal, ProdutoResponse, CupomResponse, PromocaoSteamResponse
 import db.models
 from db.database import engine, get_db
 from sqlalchemy.orm import Session
@@ -110,10 +110,17 @@ async def atualizar_promocao(promocao_id: int, promocao: PromocaoSteam, db: Sess
 @app.delete("/promocoes/{promocao_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def remover_promocao(promocao_id: int, db: Session = Depends(get_db)):
   promocao_query = db.query(db.models.promocao_steam).filter(db.models.promocao_steam.id == promocao_id)
-  
   if promocao_query.first() is None:
     raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Promoção não encontrada")
-      
   promocao_query.delete(synchronize_session=False)
   db.commit()
   return Response(status_code=status.HTTP_204_NO_CONTENT)
+
+@app.post("/notas-fiscais", status_code=status.HTTP_201_CREATED)
+async def criar_nota_fiscal(nota_fiscal: NotaFiscal, db: Session = Depends(get_db)):
+  nova_nota_fiscal = db.models.NotaFiscal(**nota_fiscal.model_dump())
+  db.add(nova_nota_fiscal)
+  db.commit()
+  db.refresh(nova_nota_fiscal)
+  print(nota_fiscal)
+  return {"NotaFiscal": nova_nota_fiscal}

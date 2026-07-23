@@ -28,6 +28,12 @@ class PromocaoSteam(BaseModel):
   link: Optional[str] = None
   imagem: Optional[str] = None
   publicado: bool = True
+  
+class NotaFiscal(BaseModel):
+  telegram_user_id: int
+  telegram_username: Optional[str] = None
+  valor_total: Optional[str] = None
+  texto_extraido: Optional[str] = None
 
 class ProdutoResponse(Produto):
   id: int
